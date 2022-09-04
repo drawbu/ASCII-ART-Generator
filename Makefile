@@ -3,6 +3,7 @@ NPM_FLAGS = --prefix client
 
 V_BIN = venv/bin
 FLASK_CMD = $(V_BIN)/flask
+BUILD_MODE = build
 
 
 all: start
@@ -13,7 +14,7 @@ client/node_modules:
 
 
 client/public/build: client/node_modules
-	$(PM) run $(NPM_FLAGS) build
+	$(PM) run $(NPM_FLAGS) $(BUILD_MODE)
 
 
 $(V_BIN):
@@ -30,6 +31,11 @@ start: $(FLASK_CMD) client/public/build
 	$(FLASK_CMD) run
 
 
+dev:
+	BUILD_MODE = autostart &
+	make -j2 start
+
+
 clean:
 	rm -rf */__pycache__
 
@@ -39,4 +45,4 @@ fclean:
 	rm -rf venv
 
 
-.PHONY: all clean fclean start
+.PHONY: all clean dev fclean start
