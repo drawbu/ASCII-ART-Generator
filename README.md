@@ -6,7 +6,12 @@ given by a user to ASCII ART images.
 
 The project uses a Flask back-end server, and Svelte for the front.
 
-## Instalation
+## Installation
+
+Note: If you have the make utility, you can use the following:
+```bash
+make
+```
 
 Setup the back-end:
 ```coffeescript
@@ -20,5 +25,3 @@ cd client
 npm install
 npm run autobuild
 ```
-
-
