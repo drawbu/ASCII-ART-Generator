@@ -47,7 +47,7 @@ def resize_img(img: ndarray) -> ndarray:
     return cv2.resize(img, (IMG_SIZE, round(height / width * IMG_SIZE)))
 
 
-def ascii_machina(pixel: List[int, int, int]) -> str:
+def ascii_machina(pixel: List[int]) -> str:
     character_ramp = " .:-=+*#%@"
     index = round(max(pixel) / (255) * (len(character_ramp)-1))
     return character_ramp[index]
