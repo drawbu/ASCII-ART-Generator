@@ -1,6 +1,6 @@
 # IDE config files
 .idea
-
+.vscode
 
 # Python env
 __pycache__
