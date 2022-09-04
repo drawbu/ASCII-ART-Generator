@@ -32,8 +32,7 @@ start: $(FLASK_CMD) client/public/build
 
 
 dev:
-	BUILD_MODE = autostart &
-	make -j2 start
+	make -j2 start BUILD_MODE='autobuild &'
 
 
 clean:
