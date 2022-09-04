@@ -1,6 +1,7 @@
 import glob
 import base64
 import io
+from typing import List
 
 import cv2
 from PIL import Image, ImageFont, ImageDraw
@@ -18,7 +19,7 @@ def main():
     print(encode_img(img))
 
 
-def img_to_ascii(img: ndarray) -> list[list[str]]:
+def img_to_ascii(img: ndarray) -> List[List[str]]:
     height, width, _ = img.shape
     return [
         [
@@ -46,17 +47,17 @@ def resize_img(img: ndarray) -> ndarray:
     return cv2.resize(img, (IMG_SIZE, round(height / width * IMG_SIZE)))
 
 
-def ascii_machina(pixel: list[int, int, int]) -> str:
+def ascii_machina(pixel: List[int, int, int]) -> str:
     character_ramp = " .:-=+*#%@"
     index = round(max(pixel) / (255) * (len(character_ramp)-1))
     return character_ramp[index]
 
 
-def show_ascii(ascii_img: list[list[str]]) -> None:
+def show_ascii(ascii_img: List[List[str]]) -> None:
     print("\n".join(" ".join(row) for row in ascii_img))
 
 
-def ascii_to_img(ascii_img: list[list[str]], img: ndarray) -> Image:
+def ascii_to_img(ascii_img: List[List[str]], img: ndarray) -> Image:
     height, width, _ = img.shape
     result_img = Image.new("RGB", (width*10, height*10), (0, 0, 0))
     font = ImageFont.load_default()
