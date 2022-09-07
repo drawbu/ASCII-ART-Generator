@@ -1,5 +1,5 @@
-import glob
 import base64
+import glob
 import io
 from typing import List
 
@@ -7,13 +7,12 @@ import cv2
 from PIL import Image, ImageFont, ImageDraw
 from numpy import ndarray
 
-
 IMG_SIZE = 100
 
 
 def main():
     # img = open_image(image_selector())
-    img = resize_img(open_image("images/urss.jpg"))
+    img = resize_img(open_image("../assets/drawbu.jpg"))
     img = ascii_to_img(img_to_ascii(img), img)
     img.show()
     print(encode_img(img))
@@ -22,16 +21,16 @@ def main():
 def img_to_ascii(img: ndarray) -> List[List[str]]:
     height, width, _ = img.shape
     return [
-        [
-            ascii_machina(img[row, col])
-            for col in range(width)
-        ] for row in range(height)
+        [ascii_machina(img[row, col]) for col in range(width)]
+        for row in range(height)
     ]
 
 
 def image_selector() -> str:
-    images = sorted(glob.glob('images/*.png') + glob.glob('images/*.jpeg'))
-    return images[int(input("\n".join(f"{i}: {img}" for i, img in enumerate(images)) + "\n> "))]
+    images = sorted(glob.glob("images/*.png") + glob.glob("images/*.jpeg"))
+    return images[
+        int(input("\n".join(f"{i}: {img}" for i, img in enumerate(images)) + "\n> "))
+    ]
 
 
 def open_image(img_path: str) -> ndarray:
@@ -49,7 +48,7 @@ def resize_img(img: ndarray) -> ndarray:
 
 def ascii_machina(pixel: List[int]) -> str:
     character_ramp = " .:-=+*#%@"
-    index = round(max(pixel) / (255) * (len(character_ramp)-1))
+    index = round(max(pixel) / 255 * (len(character_ramp) - 1))
     return character_ramp[index]
 
 
@@ -59,18 +58,23 @@ def show_ascii(ascii_img: List[List[str]]) -> None:
 
 def ascii_to_img(ascii_img: List[List[str]], img: ndarray) -> Image:
     height, width, _ = img.shape
-    result_img = Image.new("RGB", (width*10, height*10), (0, 0, 0))
+    result_img = Image.new("RGB", (width * 10, height * 10), (0, 0, 0))
     font = ImageFont.load_default()
     draw = ImageDraw.Draw(result_img)
     for i, row in enumerate(ascii_img):
         for j, pixel in enumerate(row):
-            draw.text((0 + 10*j, 0 + 10*i), pixel, fill=tuple(img[i, j]), font=font)
+            draw.text(
+                (0 + 10 * j, 0 + 10 * i),
+                pixel,
+                fill=tuple(img[i, j]),
+                font=font,
+            )
     return result_img
 
 
 def encode_img(img):
     img_bytes = io.BytesIO()
-    img.save(img_bytes, format='PNG')
+    img.save(img_bytes, format="PNG")
     img_bytes = img_bytes.getvalue()
     return base64.b64encode(img_bytes)
 
