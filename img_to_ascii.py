@@ -1,11 +1,10 @@
-import glob
 import base64
+import glob
 import io
 
 import cv2
 from PIL import Image, ImageFont, ImageDraw
 from numpy import ndarray
-
 
 IMG_SIZE = 100
 

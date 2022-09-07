@@ -1,13 +1,11 @@
-import random
 import base64
 import io
 
-from img_to_ascii import open_image, ascii_to_img, img_to_ascii, encode_img, resize_img
-
-from flask import Flask, send_from_directory, request, jsonify
-from PIL import Image
 import numpy
+from PIL import Image
+from flask import Flask, send_from_directory, request, jsonify
 
+from img_to_ascii import ascii_to_img, img_to_ascii, encode_img, resize_img
 
 app = Flask(__name__)
 
