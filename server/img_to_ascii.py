@@ -20,20 +20,14 @@ def main():
 def img_to_ascii(img: ndarray) -> list[list[str]]:
     height, width, _ = img.shape
     return [
-        [ascii_machina(img[row, col]) for col in range(width)]
-        for row in range(height)
+        [ascii_machina(img[row, col]) for col in range(width)] for row in range(height)
     ]
 
 
 def image_selector() -> str:
     images = sorted(glob.glob("images/*.png") + glob.glob("images/*.jpeg"))
     return images[
-        int(
-            input(
-                "\n".join(f"{i}: {img}" for i, img in enumerate(images))
-                + "\n> "
-            )
-        )
+        int(input("\n".join(f"{i}: {img}" for i, img in enumerate(images)) + "\n> "))
     ]
 
 
