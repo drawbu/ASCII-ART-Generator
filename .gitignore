@@ -1,13 +1,20 @@
 # IDE config files
 .idea
 
-
 # Python env
 __pycache__
 .py[cod]
 .venv
 venv
 
-# Javascript client & build
-client/node_modules
+# Packaging
+*.egg-info
+
+# Flask
+.flaskenv
+
+# Node modules
+node_modules
+
+# Front Build
 client/public/build
