@@ -19,7 +19,7 @@ $(J_BIN)/rollup:
 
 
 $(FRONT_BUILD): $(J_BIN)/rollup
-	$(J_BIN) run $(NPM_FLAGS) $(BUILD_MODE)
+	$(PM) run $(NPM_FLAGS) $(BUILD_MODE)
 
 
 $(V_BIN):
