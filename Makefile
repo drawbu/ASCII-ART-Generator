@@ -2,6 +2,11 @@ PM = npm
 NPM_FLAGS = --prefix client
 
 V_BIN = venv/bin
+J_BIN = client/node_modules/.bin
+
+ENV = .flaskenv
+FRONT_BUILD = client/public/build
+
 FLASK_CMD = $(V_BIN)/flask
 BUILD_MODE = build
 
@@ -9,12 +14,12 @@ BUILD_MODE = build
 all: start
 
 
-client/node_modules:
+$(J_BIN)/rollup:
 	$(PM) install $(NPM_FLAGS)
 
 
-client/public/build: client/node_modules
-	$(PM) run $(NPM_FLAGS) $(BUILD_MODE)
+$(FRONT_BUILD): $(J_BIN)/rollup
+	$(J_BIN) run $(NPM_FLAGS) $(BUILD_MODE)
 
 
 $(V_BIN):
@@ -22,13 +27,15 @@ $(V_BIN):
 	chmod +x $(V_BIN)/activate
 	./$(V_BIN)/activate
 
+$(ENV):
+	echo 'DEBUG_MODE=false' > $(ENV)
 
-$(FLASK_CMD): $(V_BIN)
-	$(V_BIN)/pip install -r requirements.txt
+$(FLASK_CMD): $(V_BIN) $(ENV)
+	$(V_BIN)/pip install -e .
 
 
 start: $(FLASK_CMD) client/public/build
-	$(FLASK_CMD) run
+	$(FLASK_CMD) --app server run
 
 
 dev:
@@ -37,9 +44,11 @@ dev:
 
 clean:
 	rm -rf */__pycache__
+	rm -rf *egg-info
 
 
-fclean:
+fclean: clean
+	rm -f .flaskenv
 	rm -rf client/node_modules
 	rm -rf venv
 
