@@ -12,7 +12,7 @@ IMG_SIZE = 100
 
 def main():
     # img = open_image(image_selector())
-    img = resize_img(open_image("../assets/drawbu.jpg"))
+    img = resize_img(open_image("assets/original_image.jpg"))
     img = ascii_to_img(img_to_ascii(img), img)
     img.show()
     print(encode_img(img))

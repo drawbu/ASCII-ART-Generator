@@ -27,15 +27,17 @@ $(V_BIN):
 	chmod +x $(V_BIN)/activate
 	./$(V_BIN)/activate
 
+
 $(ENV):
 	echo 'DEBUG_MODE=false' > $(ENV)
 
+
 $(FLASK_CMD): $(V_BIN) $(ENV)
-	$(V_BIN)/pip install -e .
+	$(V_BIN)/pip install -r requirements.txt
 
 
 start: $(FLASK_CMD) client/public/build
-	$(FLASK_CMD) --app server run
+	$(FLASK_CMD) run
 
 
 dev:
