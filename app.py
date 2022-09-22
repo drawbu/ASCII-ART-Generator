@@ -28,7 +28,7 @@ def static_files(path):
 
 
 @app.route("/img", methods=["POST"])
-def test():
+def img_route():
     img = base64.b64decode(request.json["image"].split(",")[1])
     img = Image.open(io.BytesIO(img)).convert("RGB")
     img = resize_img(numpy.array(img))

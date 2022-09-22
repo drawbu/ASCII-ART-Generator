@@ -7,8 +7,8 @@ J_BIN = client/node_modules/.bin
 ENV = .flaskenv
 FRONT_BUILD = client/public/build
 
-FLASK_CMD = $(V_BIN)/flask
-BUILD_MODE = build
+GUNICORN_CMD = $(V_BIN)/gunicorn
+GUNICORN_ARGS =
 
 
 all: start
@@ -32,12 +32,12 @@ $(ENV):
 	echo 'DEBUG_MODE=false' > $(ENV)
 
 
-$(FLASK_CMD): $(V_BIN) $(ENV)
+$(GUNICORN_CMD): $(V_BIN) $(ENV)
 	$(V_BIN)/pip install -r requirements.txt
 
 
-start: $(FLASK_CMD) client/public/build
-	$(FLASK_CMD) run
+start: $(GUNICORN_CMD) client/public/build
+	$(GUNICORN_CMD) --bind 0.0.0.0 wsgi:app $(GUNICORN_ARGS)
 
 
 dev:
