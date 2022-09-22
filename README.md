@@ -15,13 +15,13 @@ make
 ```
 
 Setup the back-end:
-```coffeescript
+```bash
 pip install -r requirements.txt
-flask run
+gunicorn wsgi:app
 ```
 
 Setup the front-end:
-```coffeescript
+```bash
 cd client
 npm install
 npm run autobuild
