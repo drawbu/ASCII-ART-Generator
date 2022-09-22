@@ -5,7 +5,9 @@ V_BIN = venv/bin
 J_BIN = client/node_modules/.bin
 
 ENV = .flaskenv
+
 FRONT_BUILD = client/public/build
+BUILD_MODE = build
 
 GUNICORN_CMD = $(V_BIN)/gunicorn
 GUNICORN_ARGS =
@@ -37,11 +39,11 @@ $(GUNICORN_CMD): $(V_BIN) $(ENV)
 
 
 start: $(GUNICORN_CMD) client/public/build
-	$(GUNICORN_CMD) --bind 0.0.0.0 wsgi:app $(GUNICORN_ARGS)
+	$(GUNICORN_CMD) wsgi:app $(GUNICORN_ARGS)
 
 
 dev:
-	make -j2 start BUILD_MODE='dev &'
+	make -j2 start BUILD_MODE='dev &' GUNICORN_ARGS="--reload"
 
 
 clean:

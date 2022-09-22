@@ -38,5 +38,10 @@ def img_route():
     return jsonify({"image": img})
 
 
+@app.route("/test")
+def test():
+    return "hehehehehe"
+
+
 if __name__ == "__main__":
     app.run()
