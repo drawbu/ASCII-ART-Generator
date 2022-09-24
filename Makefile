@@ -49,9 +49,6 @@ dev:
 clean:
 	rm -rf */__pycache__
 	rm -rf *egg-info
-
-
-fclean: clean
 	rm -f .flaskenv
 	rm -rf client/node_modules
 	rm -rf venv
