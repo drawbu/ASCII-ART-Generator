@@ -1,21 +1,9 @@
-import base64
-import glob
-import io
 from typing import List
 
-import cv2
 from PIL import Image, ImageFont, ImageDraw
 from numpy import ndarray
 
-IMG_SIZE = 100
-
-
-def main():
-    # img = open_image(image_selector())
-    img = resize_img(open_image("assets/original_image.jpg"))
-    img = ascii_to_img(img_to_ascii(img), img)
-    img.show()
-    print(encode_img(img))
+from img_tools import open_image, resize_img
 
 
 def img_to_ascii(img: ndarray) -> List[List[str]]:
@@ -24,26 +12,6 @@ def img_to_ascii(img: ndarray) -> List[List[str]]:
         [ascii_machina(img[row, col]) for col in range(width)]
         for row in range(height)
     ]
-
-
-def image_selector() -> str:
-    images = sorted(glob.glob("images/*.png") + glob.glob("images/*.jpeg"))
-    return images[
-        int(input("\n".join(f"{i}: {img}" for i, img in enumerate(images)) + "\n> "))
-    ]
-
-
-def open_image(img_path: str) -> ndarray:
-    img = cv2.imread(img_path, cv2.IMREAD_COLOR)
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    return img
-
-
-def resize_img(img: ndarray) -> ndarray:
-    height, width, _ = img.shape
-    if height > width:
-        return cv2.resize(img, (round(width / height * IMG_SIZE), IMG_SIZE))
-    return cv2.resize(img, (IMG_SIZE, round(height / width * IMG_SIZE)))
 
 
 def ascii_machina(pixel: List[int]) -> str:
@@ -72,12 +40,9 @@ def ascii_to_img(ascii_img: List[List[str]], img: ndarray) -> Image:
     return result_img
 
 
-def encode_img(img):
-    img_bytes = io.BytesIO()
-    img.save(img_bytes, format="PNG")
-    img_bytes = img_bytes.getvalue()
-    return base64.b64encode(img_bytes)
-
-
 if __name__ == "__main__":
-    main()
+    IMG_SIZE = 100
+
+    img = resize_img(open_image("../assets/original_image.jpg"), 100)
+    img = ascii_to_img(img_to_ascii(img), img)
+    img.show()

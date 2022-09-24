@@ -5,7 +5,7 @@ import numpy
 from PIL import Image
 from flask import Flask, send_from_directory, request, jsonify
 
-from img_to_ascii import (
+from img_tools import (
     ascii_to_img,
     img_to_ascii,
     encode_img,
