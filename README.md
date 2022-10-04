@@ -1,11 +1,13 @@
 # ASCII ART Convertor
 
-<img src="assets/screenshot.png">
+<img src="assets/screenshot.png" alt="Example of the project">
 
 This project is a web server to host a full stack website that converts Images 
 given by a user to ASCII ART images.
 
-The project uses a Flask back-end server, and Svelte for the front.
+The project uses a Flask x Gunicorn back-end server, and Svelte for the front.
+
+You can see a live example on [ascii.drawbu.dev](https://ascii.drawbu.dev).
 
 ## Installation
 
@@ -14,13 +16,13 @@ Note: If you have the make utility, you can use the following:
 make
 ```
 
-Setup the back-end:
+Set up the back-end:
 ```bash
 pip install -r requirements.txt
 gunicorn wsgi:app
 ```
 
-Setup the front-end:
+Set up the front-end:
 ```bash
 cd client
 npm install
