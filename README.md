@@ -11,11 +11,12 @@ You can see a live example on [ascii.drawbu.dev](https://ascii.drawbu.dev).
 
 ## Installation
 
-Note: If you have the make utility, you can use the following:
+**Note:** If you have the make utility, you can use the following:
 ```bash
 make
 ```
 
+**Or**, you can do the setup manually: <br>
 Set up the back-end:
 ```bash
 pip install -r requirements.txt
