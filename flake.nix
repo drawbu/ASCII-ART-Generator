@@ -81,6 +81,7 @@
               mkdir -p $out
 
               cp app.py $out
+              cp wsgi.py $out
               cp -r img_tools $out
 
               cp -r ${client}/public $out
