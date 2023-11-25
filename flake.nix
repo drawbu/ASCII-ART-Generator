@@ -84,7 +84,8 @@
               cp wsgi.py $out
               cp -r img_tools $out
 
-              cp -r ${client}/public $out
+              mkdir -p $out/client
+              cp -r ${client}/public $out/client
 
               mkdir -p $out/bin
               cp runner_script $out/bin/ascii-server
